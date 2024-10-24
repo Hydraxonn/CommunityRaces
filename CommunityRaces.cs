@@ -665,17 +665,17 @@ namespace CommunityRaces
                             if (position == 1)
                             {
                                 var reward = Config.Bet * peoplecount;
-                                _passed.AddItem("Reward", $"${reward}", MissionPassedScreen.TickboxState.None);
+                                _passed.AddItem("Reward", $"${reward/2}", MissionPassedScreen.TickboxState.None);
                                 Game.Player.Money += reward/2;
                             }else if (position == 2)
                             {
                                 var reward = Config.Bet * peoplecount;
-                                _passed.AddItem("Reward", $"${reward}", MissionPassedScreen.TickboxState.None);
+                                _passed.AddItem("Reward", $"${reward/3}", MissionPassedScreen.TickboxState.None);
                                 Game.Player.Money += reward/3;
                             }else if (position == 3)
                             {
                                 var reward = Config.Bet * peoplecount;
-                                _passed.AddItem("Reward", $"${reward}", MissionPassedScreen.TickboxState.None);
+                                _passed.AddItem("Reward", $"${reward/5}", MissionPassedScreen.TickboxState.None);
                                 Game.Player.Money += reward/5;
                             }
                         }
