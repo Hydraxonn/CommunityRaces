@@ -550,9 +550,9 @@ namespace CommunityRaces
                 const int interval = 45;
                 if (_countdown <= 0)
                 {
-                    new UIResText("TIME", new Point(Convert.ToInt32(res.Width) - safe.X - 180, Convert.ToInt32(res.Height) - safe.Y - (90 + (1 * interval))), 0.3f, Color.White).Draw();
-                    new UIResText(FormatTime(_seconds - _missionStart), new Point(Convert.ToInt32(res.Width) - safe.X - 20, Convert.ToInt32(res.Height) - safe.Y - (102 + (1 * interval))), 0.5f, Color.White, Font.ChaletLondon, UIResText.Alignment.Right).Draw();
-                    new Sprite("timerbars", "all_black_bg", new Point(Convert.ToInt32(res.Width) - safe.X - 248, Convert.ToInt32(res.Height) - safe.Y - (100 + (1 * interval))), new Size(250, 37), 0f, Color.FromArgb(200, 255, 255, 255)).Draw();
+                    new UIResText("TIME", new Point(Convert.ToInt32(res.Width) - safe.X - 180, Convert.ToInt32(res.Height) - safe.Y - (190 + (1 * interval))), 0.3f, Color.White).Draw();
+                    new UIResText(FormatTime(_seconds - _missionStart), new Point(Convert.ToInt32(res.Width) - safe.X - 20, Convert.ToInt32(res.Height) - safe.Y - (202 + (1 * interval))), 0.5f, Color.White, Font.ChaletLondon, UIResText.Alignment.Right).Draw();
+                    new Sprite("timerbars", "all_black_bg", new Point(Convert.ToInt32(res.Width) - safe.X - 248, Convert.ToInt32(res.Height) - safe.Y - (200 + (1 * interval))), new Size(250, 37), 0f, Color.FromArgb(200, 255, 255, 255)).Draw();
 
                     string label, value;
                     if (_currentRivals.Any())
@@ -565,18 +565,18 @@ namespace CommunityRaces
                         label = "BEST";
                         value = _replay.Time > 0 ? FormatTime(_replay.Time) : "--:--";
                     }
-                    new UIResText(label, new Point(Convert.ToInt32(res.Width) - safe.X - 180, Convert.ToInt32(res.Height) - safe.Y - (90 + (2 * interval))), 0.3f, Color.White).Draw();
-                    new UIResText(value, new Point(Convert.ToInt32(res.Width) - safe.X - 20, Convert.ToInt32(res.Height) - safe.Y - (102 + (2 * interval))), 0.5f, Color.White, Font.ChaletLondon, UIResText.Alignment.Right).Draw();
-                    new Sprite("timerbars", "all_black_bg", new Point(Convert.ToInt32(res.Width) - safe.X - 248, Convert.ToInt32(res.Height) - safe.Y - (100 + (2 * interval))), new Size(250, 37), 0f, Color.FromArgb(200, 255, 255, 255)).Draw();
+                    new UIResText(label, new Point(Convert.ToInt32(res.Width) - safe.X - 180, Convert.ToInt32(res.Height) - safe.Y - (190 + (2 * interval))), 0.3f, Color.White).Draw();
+                    new UIResText(value, new Point(Convert.ToInt32(res.Width) - safe.X - 20, Convert.ToInt32(res.Height) - safe.Y - (202 + (2 * interval))), 0.5f, Color.White, Font.ChaletLondon, UIResText.Alignment.Right).Draw();
+                    new Sprite("timerbars", "all_black_bg", new Point(Convert.ToInt32(res.Width) - safe.X - 248, Convert.ToInt32(res.Height) - safe.Y - (200 + (2 * interval))), new Size(250, 37), 0f, Color.FromArgb(200, 255, 255, 255)).Draw();
 
                     if (_laps > 1)
                     {
                         int playerCheckpoint = _currentRace.Checkpoints.Length - _checkpoints.Count;
                         int currentLap = Convert.ToInt32(Math.Floor(playerCheckpoint / (decimal)_totalLaps)) + 1;
 
-                        new UIResText("LAP", new Point(Convert.ToInt32(res.Width) - safe.X - 180, Convert.ToInt32(res.Height) - safe.Y - (90 + (3 * interval))), 0.3f, Color.White).Draw();
-                        new UIResText(currentLap + "/" + _laps, new Point(Convert.ToInt32(res.Width) - safe.X - 20, Convert.ToInt32(res.Height) - safe.Y - (102 + (3 * interval))), 0.5f, Color.White, Font.ChaletLondon, UIResText.Alignment.Right).Draw();
-                        new Sprite("timerbars", "all_black_bg", new Point(Convert.ToInt32(res.Width) - safe.X - 248, Convert.ToInt32(res.Height) - safe.Y - (100 + (3 * interval))), new Size(250, 37), 0f, Color.FromArgb(200, 255, 255, 255)).Draw();
+                        new UIResText("LAP", new Point(Convert.ToInt32(res.Width) - safe.X - 180, Convert.ToInt32(res.Height) - safe.Y - (190 + (3 * interval))), 0.3f, Color.White).Draw();
+                        new UIResText(currentLap + "/" + _laps, new Point(Convert.ToInt32(res.Width) - safe.X - 20, Convert.ToInt32(res.Height) - safe.Y - (202 + (3 * interval))), 0.5f, Color.White, Font.ChaletLondon, UIResText.Alignment.Right).Draw();
+                        new Sprite("timerbars", "all_black_bg", new Point(Convert.ToInt32(res.Width) - safe.X - 248, Convert.ToInt32(res.Height) - safe.Y - (200 + (3 * interval))), new Size(250, 37), 0f, Color.FromArgb(200, 255, 255, 255)).Draw();
                     }
 
                     if (Environment.TickCount >= _lastRecord + 100)
@@ -666,7 +666,17 @@ namespace CommunityRaces
                             {
                                 var reward = Config.Bet * peoplecount;
                                 _passed.AddItem("Reward", $"${reward}", MissionPassedScreen.TickboxState.None);
-                                Game.Player.Money += reward;
+                                Game.Player.Money += reward/2;
+                            }else if (position == 2)
+                            {
+                                var reward = Config.Bet * peoplecount;
+                                _passed.AddItem("Reward", $"${reward}", MissionPassedScreen.TickboxState.None);
+                                Game.Player.Money += reward/3;
+                            }else if (position == 3)
+                            {
+                                var reward = Config.Bet * peoplecount;
+                                _passed.AddItem("Reward", $"${reward}", MissionPassedScreen.TickboxState.None);
+                                Game.Player.Money += reward/5;
                             }
                         }
                         if (_replay.Time == 0 || _seconds - _missionStart < _replay.Time)
@@ -685,7 +695,7 @@ namespace CommunityRaces
                         {
                             CloseMissionPassedScreen(false);
                         };
-                        _passed.Show();
+                        _passed.Show(position);
                         _isInRace = false;
                     }
                 }

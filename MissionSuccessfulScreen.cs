@@ -36,9 +36,18 @@ namespace CommunityRaces
             _items.Add(new Tuple<string, string, TickboxState>(label, status, state));
         }
 
-        public void Show()
+        public void Show(int position)
         {
             Visible = true;
+            if (position == 1)
+            {
+                Function.Call(Hash._0xB138AAB8A70D3C69, new InputArgument[1] { "FRANKLIN_BIG_01" });
+            }
+            else if (position == 2 || position == 3)
+            {
+                Function.Call(Hash._0xB138AAB8A70D3C69, new InputArgument[1] { "FRANKLIN_SMALL_01" });
+            }
+            
         }
 
         public void Draw()
@@ -91,22 +100,22 @@ namespace CommunityRaces
             }
 
             new Sprite("mpmissionend", medalSprite, new Point(middle + 150, 320 + (40 * _items.Count)), new Size(32, 32)).Draw();
-
+            
             var scaleform = new Scaleform("instructional_buttons");
             scaleform.CallFunction("CLEAR_ALL");
             scaleform.CallFunction("TOGGLE_MOUSE_BUTTONS", 0);
             scaleform.CallFunction("CREATE_CONTAINER");
 
-            scaleform.CallFunction("SET_DATA_SLOT", 0, Function.Call<string>(Hash._0x0499D7B09FC9B407, 2, (int)Control.FrontendAccept, 0), "Return");
-            scaleform.CallFunction("SET_DATA_SLOT", 1, Function.Call<string>(Hash._0x0499D7B09FC9B407, 2, (int)Control.FrontendCancel, 0), "Continue");
+            scaleform.CallFunction("SET_DATA_SLOT", 0, Function.Call<string>(Hash._0x0499D7B09FC9B407, 2, (int)Control.FrontendCancel, 0), "Return");
+            scaleform.CallFunction("SET_DATA_SLOT", 1, Function.Call<string>(Hash._0x0499D7B09FC9B407, 2, (int)Control.FrontendAccept, 0), "Continue");
             scaleform.CallFunction("DRAW_INSTRUCTIONAL_BUTTONS", -1);
             scaleform.Render2D();
-            if (Game.IsControlJustPressed(0, Control.FrontendAccept))
+            if (Game.IsControlJustPressed(0, Control.FrontendCancel))
             {
                 Game.PlaySound("SELECT", "HUD_FRONTEND_DEFAULT_SOUNDSET");
                 ContinueHit();
             }
-            else if (Game.IsControlJustPressed(0, Control.FrontendCancel))
+            else if (Game.IsControlJustPressed(0, Control.FrontendAccept))
             {
                 Game.PlaySound("SELECT", "HUD_FRONTEND_DEFAULT_SOUNDSET");
                 CancelHit();
